@@ -1,0 +1,14 @@
+[
+  {
+    "code": 1001,
+    "name": "kerolos",
+    "math": 75,
+    "science": 80
+  },
+  {
+    "code": 1002,
+    "name": "mina",
+    "math": 95,
+    "science": 50
+  }
+]

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نتائج الصف الأول</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light text-center">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">نظام نتائج الطلاب</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="تبديل التنقل">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="../grade1/index.html">الصف الأول</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade2/index.html">الصف الثاني</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade3/index.html">الصف الثالث</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade4/index.html">الصف الرابع</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade5/index.html">الصف الخامس</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade6/index.html">الصف السادس</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-5" style="max-width: 400px;">
+    <h2 class="mb-4">نتائج الصف الأول</h2>
+
+    <form id="searchForm" class="text-start">
+      <div class="mb-3">
+        <label for="studentCode" class="form-label">أدخل كود الطالب:</label>
+        <input type="text" class="form-control" id="studentCode" name="studentCode" required />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">ابحث</button>
+    </form>
+
+    <div id="result" class="mt-4"></div>
+  </main>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const studentsData = [
+      { code: "12345", name: "أحمد علي", total: 95 },
+      { code: "54321", name: "سارة محمد", total: 87 },
+    ];
+
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const code = document.getElementById('studentCode').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      const student = studentsData.find(s => s.code === code);
+
+      if (student) {
+        resultDiv.innerHTML = `
+          <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">النتيجة:</h4>
+            <p>الاسم: ${student.name}</p>
+            <p>المجموع: ${student.total}</p>
+          </div>
+        `;
+      } else {
+        resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">لم يتم العثور على الطالب.</div>`;
+      }
+    });
+  </script>
+
+</body>
+</html>
