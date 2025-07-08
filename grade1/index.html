@@ -48,8 +48,8 @@
 
   <script>
     const studentsData = [
-      { code: "12345", name: "أحمد علي", total: 95 },
-      { code: "54321", name: "سارة محمد", total: 87 },
+      { code: "12345", name: "أحمد علي", الحان: "ناجح", قبطي : "أعادة" , طقس:"ناجح" , محفوظات:"ناجح"},
+      { code: "54321", name: "كيرلس علي", الحان: "أعادة", قبطي : "أعادة" , طقس:"ناجح" , محفوظات:"ناجح"},
     ];
 
     document.getElementById('searchForm').addEventListener('submit', function (e) {
@@ -64,7 +64,10 @@
           <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">النتيجة:</h4>
             <p>الاسم: ${student.name}</p>
-            <p>المجموع: ${student.total}</p>
+            <p>الحان: ${student.الحان}</p>
+            <p>المحفوظات: ${student.محفوظات}</p>
+            <p>الطقس: ${student.طقس}</p>
+            <p>القبطي: ${student.قبطي}</p>
           </div>
         `;
       } else {
