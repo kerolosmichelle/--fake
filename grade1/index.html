@@ -6,12 +6,33 @@
   <title>نتائج الصف الأول</title>
   <!-- Bootstrap CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Cairo', sans-serif;
+    }
+    .search-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .result-card {
+      border-radius: 1rem;
+      padding: 1.5rem;
+      background: #eaf4ff;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+  </style>
 </head>
-<body class="bg-light text-center">
+<body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">نظام نتائج الطلاب</a>
+      <a class="navbar-brand" href="../index.html">مدرسة شمامسة الملاك سوريال و مارمينا</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="تبديل التنقل">
         <span class="navbar-toggler-icon"></span>
@@ -29,51 +50,63 @@
     </div>
   </nav>
 
-  <main class="container mt-5" style="max-width: 400px;">
-    <h2 class="mb-4">نتائج الصف الأول</h2>
-
-    <form id="searchForm" class="text-start">
-      <div class="mb-3">
-        <label for="studentCode" class="form-label">أدخل كود الطالب:</label>
-        <input type="text" class="form-control" id="studentCode" name="studentCode" required />
-      </div>
-      <button type="submit" class="btn btn-primary w-100">ابحث</button>
-    </form>
-
-    <div id="result" class="mt-4"></div>
+  <!-- Main Content -->
+  <main class="container my-5">
+    <div class="search-card mx-auto" style="max-width: 500px;">
+      <h2 class="mb-4 text-center">نتائج الصف الأول</h2>
+      <form id="searchForm">
+        <div class="mb-3">
+          <label for="studentCode" class="form-label">أدخل كود الطالب:</label>
+          <input type="text" class="form-control" id="studentCode" name="studentCode" placeholder="ادخل الرقم الفومي" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">ابحث عن النتيجة</button>
+      </form>
+      <div id="result" class="mt-4"></div>
+    </div>
   </main>
 
-  <!-- Bootstrap JS Bundle with Popper -->
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Student Search Script -->
   <script>
-    const studentsData = [
-      { code: "12345", name: "أحمد علي", الحان: "ناجح", قبطي : "أعادة" , طقس:"ناجح" , محفوظات:"ناجح"},
-      { code: "54321", name: "كيرلس علي", الحان: "أعادة", قبطي : "أعادة" , طقس:"ناجح" , محفوظات:"ناجح"},
-    ];
+  let studentsData = [];
 
-    document.getElementById('searchForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const code = document.getElementById('studentCode').value.trim();
-      const resultDiv = document.getElementById('result');
-
-      const student = studentsData.find(s => s.code === code);
-
-      if (student) {
-        resultDiv.innerHTML = `
-          <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">النتيجة:</h4>
-            <p>الاسم: ${student.name}</p>
-            <p>الحان: ${student.الحان}</p>
-            <p>المحفوظات: ${student.محفوظات}</p>
-            <p>الطقس: ${student.طقس}</p>
-            <p>القبطي: ${student.قبطي}</p>
-          </div>
-        `;
-      } else {
-        resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">لم يتم العثور على الطالب.</div>`;
-      }
+  // Load JSON file
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      studentsData = data;
+    })
+    .catch(error => {
+      console.error("فشل في تحميل البيانات:", error);
     });
+
+  // Search logic
+  document.getElementById('searchForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const code = document.getElementById('studentCode').value.trim();
+    const resultDiv = document.getElementById('result');
+
+    const student = studentsData.find(s => s.code === code);
+
+    if (student) {
+      resultDiv.innerHTML = `
+        <div class="result-card text-start">
+          <h5 class="mb-3">نتيجة الطالب</h5>
+          <p><strong>الاسم:</strong> ${student.name}</p>
+          <p><strong>الألحان:</strong> ${student.al7an}</p>
+          <p><strong>المحفوظات:</strong> ${student.ma7fozat}</p>
+          <p><strong>الطقس:</strong> ${student.takkes}</p>
+          <p><strong>القبطي:</strong> ${student.el2bty}</p>
+        </div>
+
+        </div>
+      `;
+    } else {
+      resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">لم يتم العثور على الطالب. تأكد من صحة الكود.</div>`;
+    }
+  });
   </script>
 
 </body>
