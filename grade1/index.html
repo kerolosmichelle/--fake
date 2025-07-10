@@ -6,45 +6,188 @@
   <title>نتائج الصف الأول</title>
   <!-- Bootstrap CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts - Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      background: #f8f9fa;
-      font-family: 'Cairo', sans-serif;
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #4cc9f0;
+      --light-bg: #f8f9fa;
+      --dark-text: #212529;
     }
+    
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      font-family: 'Cairo', sans-serif;
+      min-height: 100vh;
+    }
+    
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar-brand i {
+      margin-left: 8px;
+    }
+    
+    .nav-link {
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      background-color: rgba(255,255,255,0.2);
+    }
+    
     .search-card {
       background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border: none;
+      transition: transform 0.3s ease;
     }
+    
+    .search-card:hover {
+      transform: translateY(-5px);
+    }
+    
     .result-card {
-      border-radius: 1rem;
-      padding: 1.5rem;
-      background: #eaf4ff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+      box-shadow: 0 5px 20px rgba(67, 97, 238, 0.15);
+      border: 1px solid rgba(67, 97, 238, 0.1);
     }
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 1.3rem;
+    
+    .result-header {
+      color: var(--primary-color);
+      border-bottom: 2px solid rgba(67, 97, 238, 0.2);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .result-header i {
+      margin-left: 10px;
+      font-size: 1.5rem;
+    }
+    
+    .result-item {
+      margin-bottom: 1rem;
+      padding: 0.8rem 1rem;
+      background-color: rgba(67, 97, 238, 0.05);
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    
+    .result-item:hover {
+      background-color: rgba(67, 97, 238, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .result-item strong {
+      color: var(--secondary-color);
+      font-weight: 600;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      border: none;
+      padding: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+    
+    .form-control {
+      padding: 0.75rem 1rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.25rem rgba(76, 201, 240, 0.25);
+    }
+    
+    .success-badge {
+      background-color: #2ecc71;
+      color: white;
+      padding: 0.35rem 0.75rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .danger-badge {
+      background-color: #e74c3c;
+      color: white;
+      padding: 0.35rem 0.75rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .footer {
+      background-color: rgba(0,0,0,0.03);
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    @media (max-width: 768px) {
+      .search-card {
+        padding: 1.5rem;
+      }
+      
+      .navbar-brand {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="../index.html">مدرسة شمامسة الملاك سوريال و مارمينا</a>
+      <a class="navbar-brand" href="../index.html">
+        <i class="fas fa-church"></i>
+        مدرسة شمامسة الملاك سوريال و مارمينا
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="تبديل التنقل">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="../grade1/index.html">الصف الأول</a></li>
-          <li class="nav-item"><a class="nav-link" href="../grade2/index.html">الصف الثاني</a></li>
-          <li class="nav-item"><a class="nav-link" href="../grade3/index.html">الصف الثالث</a></li>
-          <li class="nav-item"><a class="nav-link" href="../grade4/index.html">الصف الرابع</a></li>
-          <li class="nav-item"><a class="nav-link" href="../grade5/index.html">الصف الخامس</a></li>
-          <li class="nav-item"><a class="nav-link" href="../grade6/index.html">الصف السادس</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade1/index.html"><i class="fas fa-graduation-cap me-1"></i> الصف الأول</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade2/index.html"><i class="fas fa-graduation-cap me-1"></i> الصف الثاني</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade3/index.html"><i class="fas fa-graduation-cap me-1"></i> الصف الثالث</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade4/index.html"><i class="fas fa-graduation-cap me-1"></i> الصف الرابع</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade5/index.html"><i class="fas fa-graduation-cap me-1"></i> الصف الخامس</a></li>
+          <li class="nav-item"><a class="nav-link" href="../grade6/index.html"><i class="fas fa-graduation-cap me-1"></i> الصف السادس</a></li>
         </ul>
       </div>
     </div>
@@ -52,18 +195,40 @@
 
   <!-- Main Content -->
   <main class="container my-5">
-    <div class="search-card mx-auto" style="max-width: 500px;">
-      <h2 class="mb-4 text-center">نتائج الصف الأول</h2>
-      <form id="searchForm">
-        <div class="mb-3">
-          <label for="studentCode" class="form-label">أدخل كود الطالب:</label>
-          <input type="text" class="form-control" id="studentCode" name="studentCode" placeholder="ادخل الرقم الفومي" required />
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="search-card">
+          <h2 class="mb-4 text-center text-primary">
+            <i class="fas fa-search me-2"></i>
+            نتائج الصف الأول
+          </h2>
+          <form id="searchForm">
+            <div class="mb-4">
+              <label for="studentCode" class="form-label fw-bold">أدخل كود الطالب:</label>
+              <div class="input-group">
+                <span class="input-group-text bg-primary text-white"><i class="fas fa-id-card"></i></span>
+                <input type="text" class="form-control" id="studentCode" name="studentCode" placeholder="ادخل الرقم القومي" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 mt-2">
+              <i class="fas fa-search me-2"></i>
+              ابحث عن النتيجة
+            </button>
+          </form>
+          <div id="result" class="mt-4"></div>
         </div>
-        <button type="submit" class="btn btn-primary w-100">ابحث عن النتيجة</button>
-      </form>
-      <div id="result" class="mt-4"></div>
+      </div>
     </div>
   </main>
+
+  <footer class="footer text-center">
+    <div class="container">
+      <p class="mb-0 text-muted">
+        <i class="fas fa-copyright me-1"></i>
+        جميع الحقوق محفوظة لمدرسة شمامسة الملاك سوريال و مارمينا © 2023
+      </p>
+    </div>
+  </footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -92,19 +257,50 @@
 
     if (student) {
       resultDiv.innerHTML = `
-        <div class="result-card text-start">
-          <h5 class="mb-3">نتيجة الطالب</h5>
-          <p><strong>الاسم:</strong> ${student.name}</p>
-          <p><strong>الألحان:</strong> ${student.al7an}</p>
-          <p><strong>المحفوظات:</strong> ${student.ma7fozat}</p>
-          <p><strong>الطقس:</strong> ${student.takkes}</p>
-          <p><strong>القبطي:</strong> ${student.el2bty}</p>
-        </div>
-
+        <div class="result-card mt-4">
+          <div class="result-header">
+            <i class="fas fa-user-graduate"></i>
+            <h4 class="mb-0">نتيجة الطالب</h4>
+          </div>
+          
+          <div class="result-item">
+            <strong>الاسم:</strong> ${student.name}
+          </div>
+          
+          <div class="result-item">
+            <strong>الألحان:</strong> ${student.al7an} 
+            ${student.al7an === "ناجح" ? '<span class="success-badge ms-2"><i class="fas fa-check me-1"></i>ناجح</span>' : 
+              '<span class="danger-badge ms-2"><i class="fas fa-times me-1"></i>إعادة</span>'}
+          </div>
+          
+          <div class="result-item">
+            <strong>المحفوظات:</strong> ${student.ma7fozat}
+            ${student.ma7fozat === "ناجح" ? '<span class="success-badge ms-2"><i class="fas fa-check me-1"></i>ناجح</span>' : 
+              '<span class="danger-badge ms-2"><i class="fas fa-times me-1"></i>إعادة</span>'}
+          </div>
+          
+          <div class="result-item">
+            <strong>الطقس:</strong> ${student.takkes}
+            ${student.takkes === "ناجح" ? '<span class="success-badge ms-2"><i class="fas fa-check me-1"></i>ناجح</span>' : 
+              '<span class="danger-badge ms-2"><i class="fas fa-times me-1"></i>إعادة</span>'}
+          </div>
+          
+          <div class="result-item">
+            <strong>القبطي:</strong> ${student.el2bty}
+            ${student.el2bty === "ناجح" ? '<span class="success-badge ms-2"><i class="fas fa-check me-1"></i>ناجح</span>' : 
+              '<span class="danger-badge ms-2"><i class="fas fa-times me-1"></i>إعادة</span>'}
+          </div>
         </div>
       `;
     } else {
-      resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">لم يتم العثور على الطالب. تأكد من صحة الكود.</div>`;
+      resultDiv.innerHTML = `
+        <div class="alert alert-danger d-flex align-items-center mt-4" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          <div>
+            لم يتم العثور على الطالب. تأكد من صحة الكود.
+          </div>
+        </div>
+      `;
     }
   });
   </script>
